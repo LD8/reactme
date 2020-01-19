@@ -25,6 +25,43 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <script>
+    // console.log(typeof()); error
+    console.log(typeof('undefined'));
+    console.log(typeof(undefined));
+    console.log(typeof(Null));
+    console.log(typeof(''));
+    console.log(typeof(null));
+    console.log(typeof(true));
+    console.log(typeof(3.14));
+    console.log(typeof(3));
+    console.log(typeof(Symbol));
+    console.log(typeof(BigInt));
+    
+    // first attempt: const isInt = x => typeof(x) === number && x % 1 === 0;
+    // second attempt: const isInt = x => typeof(x) === Number && x % 1 === 0;
+    const isInt = x => typeof(x) === 'number' && x % 1 === 0;
+    console.log(isInt(3)); // true
+    console.log(isInt(3.14)); // false
+    
+    function numCat(n) {
+      if (typeof(n) === 'number') {
+        if (n % 1 === 0) {
+          return "It's an integer";
+        }
+        else {
+          return "It's a float";
+        }
+      }
+      return 'undefined'
+    }
+    console.log(numCat('abc')); // "undefined"
+    console.log(numCat(3)); // "It's an integer"
+    console.log(numCat(3.14)); // "It's a float"
+
+    let d = '2019.12.12'
+    console.log(typeof(d))
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
