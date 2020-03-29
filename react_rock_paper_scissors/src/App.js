@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import Rock_img from "./img/rock.png";
-import Paper_img from "./img/paper.png";
-import Scissors_img from "./img/scissors.png";
+import Rock from "./img/rock.png";
+import Paper from "./img/paper.png";
+import Scissors from "./img/scissors.png";
 
 const weapons = [
-  { name: "Rock", img: Rock_img },
-  { name: "Paper", img: Paper_img },
-  { name: "Scissors", img: Scissors_img }
+  { name: "Rock", img: Rock },
+  { name: "Paper", img: Paper },
+  { name: "Scissors", img: Scissors }
 ];
 
 function Info({ myChoice }) {
   return (
     <div>
       <p id="info">
-        {myChoice ? "My choice was " + myChoice : "Choose to start the game!"}
+        {myChoice ? "My choice was " + myChoice : "Make your move!"}
       </p>
     </div>
   );
@@ -25,13 +25,32 @@ class App extends Component {
     this.state = {
       myChoice: "",
       computerChoice: "",
+      computerChoiceIndex: 0,
       myScore: 0,
       computerScore: 0,
       winner: ""
     };
   }
 
+  hideRestSigns = choice => {
+    const signs = document.querySelectorAll(".sign-box");
+    signs.forEach(sign => {
+      // console.log(sign.id);
+      if (sign.id !== choice) {
+        sign.style.visibility = "hidden";
+      } else {
+        sign.style.top="-80px"
+      }
+    });
+  };
+
+  revealSigns = () => {
+    const signs = document.querySelectorAll(".sign-box");
+    signs.forEach(sign => (sign.style.cssText = "visibility: visible; top: 0;"));
+  };
+  
   game = choice => {
+    this.hideRestSigns(choice);
     this.setState({ myChoice: choice });
     let counter = 0;
     const id = setInterval(() => {
@@ -49,63 +68,16 @@ class App extends Component {
         });
       }
     }, 100);
+    setTimeout(() => this.revealSigns(), 1800);
   };
 
-  // game = choice => {
-  //   this.setState({ myChoice: choice });
-  //   this.setComputerChoice();
-
-  //   const winner = this.evaluate(
-  //     this.state.myChoice,
-  //     this.state.computerChoice
-  //   );
-  //   this.setState({
-  //     winner: winner
-  //   });
-  // };
-
-  // game = choice => {
-  //   this.setState({ myChoice: choice });
-  //   this.setComputerChoice();
-
-  //   setTimeout(
-  //     () => this.evaluate(this.state.myChoice, this.state.computerChoice),
-  //     5
-  //   );
-  // };
-
-  // evaluate = (myChoice, computerChoice) => {
-  //   if (myChoice === computerChoice) {
-  //     console.log(this.state);
-  //     this.setState({
-  //       winner: "DRAW!"
-  //     });
-  //     this.glow(myChoice, "draw-glow");
-  //   } else if (
-  //     (myChoice === "Rock" && computerChoice === "Scissors") ||
-  //     (myChoice === "Scissors" && computerChoice === "Paper") ||
-  //     (myChoice === "Paper" && computerChoice === "Rock")
-  //   ) {
-  //     this.setState({ myScore: this.state.myScore + 1 });
-  //     console.log(this.state);
-  //     this.setState({
-  //       winner: "I WON!!"
-  //     });
-  //     this.glow(myChoice, "win-glow");
-  //   } else {
-  //     this.setState({ computerScore: this.state.computerScore + 1 });
-  //     console.log(this.state);
-  //     this.setState({
-  //       winner: "I LOST..."
-  //     });
-  //     this.glow(myChoice, "lose-glow");
-  //   }
-  // };
-
-  setComputerChoice = () =>
+  setComputerChoice = () => {
+    const computerChoiceIndex = Math.floor(Math.random() * weapons.length);
     this.setState({
-      computerChoice: weapons[Math.floor(Math.random() * weapons.length)].name
+      computerChoiceIndex: computerChoiceIndex,
+      computerChoice: weapons[computerChoiceIndex].name
     });
+  };
 
   evaluate = (myChoice, computerChoice) => {
     if (myChoice === computerChoice) {
@@ -151,13 +123,21 @@ class App extends Component {
           </div>
 
           <div>
-            <p id="status">
-              {this.state.winner ? this.state.winner : "Who wins?"}
+            <p id="computerStatus">
+              {this.state.myChoice ? (
+                <img id="computerStatusImgTag"
+                  src={weapons[this.state.computerChoiceIndex].img}
+                  alt={
+                    weapons[this.state.computerChoiceIndex].name +
+                    " for the game"
+                  }
+                />
+              ) : null}
             </p>
-            <p id="tellStatus">
-              {this.state.myChoice
-                ? this.state.myChoice + " VS " + this.state.computerChoice
-                : null}
+            <hr />
+            <p id="myStatus">
+              {/* {this.state.winner ? this.state.winner : "Make your move!"} */}
+              {/* {this.state.winner ? null : "Make your move!"} */}
             </p>
           </div>
 
@@ -217,3 +197,54 @@ function Footer() {
   );
 }
 export default App;
+
+// game = choice => {
+//   this.setState({ myChoice: choice });
+//   this.setComputerChoice();
+
+//   const winner = this.evaluate(
+//     this.state.myChoice,
+//     this.state.computerChoice
+//   );
+//   this.setState({
+//     winner: winner
+//   });
+// };
+
+// game = choice => {
+//   this.setState({ myChoice: choice });
+//   this.setComputerChoice();
+
+//   setTimeout(
+//     () => this.evaluate(this.state.myChoice, this.state.computerChoice),
+//     5
+//   );
+// };
+
+// evaluate = (myChoice, computerChoice) => {
+//   if (myChoice === computerChoice) {
+//     console.log(this.state);
+//     this.setState({
+//       winner: "DRAW!"
+//     });
+//     this.glow(myChoice, "draw-glow");
+//   } else if (
+//     (myChoice === "Rock" && computerChoice === "Scissors") ||
+//     (myChoice === "Scissors" && computerChoice === "Paper") ||
+//     (myChoice === "Paper" && computerChoice === "Rock")
+//   ) {
+//     this.setState({ myScore: this.state.myScore + 1 });
+//     console.log(this.state);
+//     this.setState({
+//       winner: "I WON!!"
+//     });
+//     this.glow(myChoice, "win-glow");
+//   } else {
+//     this.setState({ computerScore: this.state.computerScore + 1 });
+//     console.log(this.state);
+//     this.setState({
+//       winner: "I LOST..."
+//     });
+//     this.glow(myChoice, "lose-glow");
+//   }
+// };

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
 
 :root {
   --bg-color: rgb(7, 62, 82);
@@ -9,7 +9,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Press Start 2P', monospace;;
+  font-family: "Press Start 2P", monospace;
+  /* overflow: hidden; */
 }
 
 header {
@@ -23,7 +24,6 @@ header {
 }
 header > h1 {
   font-size: 30px;
-
 }
 main {
   display: flex;
@@ -40,9 +40,9 @@ main {
 }
 
 #scoreBoard,
-#status,
+#myStatus,
 #info,
-#tellStatus {
+#computerStatus {
   text-align: center;
   color: white;
   font-size: 20px;
@@ -75,20 +75,28 @@ main {
   margin-right: 30px;
 }
 
-#status {
+#myStatus {
   font-size: 30px;
   margin-bottom: 10px;
 }
-#tellStatus {
+#computerStatus {
   font-size: 20px;
+}
+#computerStatusImgTag{
+  transform: scaleY(-1);
 }
 .sign-boxes {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: scale(0.8);
+  margin-bottom: 80px;
 }
-
+hr {
+  margin: 20px 0 40px;
+}
 .sign-box {
+  position: relative;
   display: flex;
   justify-content: center;
   border-radius: 50%;
@@ -146,4 +154,11 @@ footer a {
   border-color: rgb(171, 171, 171);
   box-shadow: 0 0 20px rgb(55, 55, 55) !important;
   background: rgb(109, 109, 109) !important;
+}
+
+@media only screen and (max-width: 1000px) {
+  header > h1,
+  .sign-boxes {
+    transform: scale(0.5);
+  }
 }
