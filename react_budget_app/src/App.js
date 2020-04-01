@@ -1,93 +1,65 @@
 import React, { useState, useEffect } from "react";
+import { Header } from "./components/Header";
+import { Balance } from "./components/Balance";
+import { AddTransaction } from "./components/AddTransaction";
+import { Transaction } from "./components/Transaction";
+import { Transactions } from "./components/Transactions";
 import "./App.css";
 
-function DisplayBalance({ balance }) {
-  return (
-    <div id="DisplayBalance">
-      <h2>{balance}</h2>
-    </div>
+// const mockTransactionList = [
+//   { id: 1, description: "Income", amount: "1000" },
+//   { id: 2, description: "Fish", amount: "-20" },
+//   { id: 3, description: "Rent", amount: "400" },
+//   { id: 4, description: "Breakfast", amount: "-7" },
+//   { id: 5, description: "Dog food", amount: "-30" },
+//   { id: 6, description: "Muj's bread", amount: "-130" }
+// ]
+
+export default function App() {
+  // const [transactionList, setTransactionList] = useState(mockTransactionList);
+  const [transactionList, setTransactionList] = useState(
+    localStorage.getItem("transactions") !== null
+      ? JSON.parse(localStorage.getItem("transactions"))
+      : []
   );
-}
+  const [amounts, setAmounts] = useState([]);
 
-function Items({ itemList }) {
-  const items = itemList.map(item => (
-    <li className="item" key={item.description}>
-      <span>{item.description}</span>
-      <span>{item.amount}</span>
-    </li>
-  ));
-
-  return <ul id="Items">{items}</ul>;
-}
-
-function App() {
-  const [balance, setBalance] = useState(0);
-  const [itemList, setItemList] = useState([]);
-  const [item, setItem] = useState({ description: "", amount: 0 });
-
-  // const handleAddItemInput = e => {
-  //   e.target.name === "description"
-  //     ? setItem({...item, description: e.target.value })
-  //     : setItem({...item, amount: parseInt(e.target.value) });
-  // };
-
-  const handleAddItemInput = e => {
-    setItem({
-      ...item,
-      [e.target.name]:
-        e.target.name === "description"
-          ? e.target.value
-          : parseInt(e.target.value)
-    });
-  };
-
-  const handleAddItemFormSubmit = e => {
-    e.preventDefault();
-    setItemList([...itemList, item]);
-    setItem({ description: "", amount: 0 });
-    // getBalance(); // why can't it be here?
-  };
-
-  const getBalance = () =>
-    setBalance(() => {
-      const amounts = itemList.map(item => item.amount);
-      return amounts.reduce((acc, amount) => (acc += amount), 0); //fix the result to be 2 decimal float
-    });
-
-  // still do NOT understand this function, WHY??
   useEffect(() => {
-    getBalance();
-  });
+    setAmounts(
+      transactionList.map(transaction => parseInt(transaction.amount))
+    );
+    localStorage.setItem("transactions", JSON.stringify(transactionList));
+  }, [transactionList]);
 
+  const handleAddTransaction = newTransaction => {
+    setTransactionList([newTransaction, ...transactionList]);
+  };
+
+  const handleDeleteTransaction = id => {
+    setTransactionList(
+      transactionList.filter(transaction => transaction.id !== id)
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>React Budget App</h1>
-      </header>
-
-      <DisplayBalance balance={balance} />
-
-      <form id="AddItemForm" onSubmit={handleAddItemFormSubmit}>
-        <input
-          type="text"
-          name="description"
-          value={item.description}
-          onChange={handleAddItemInput}
-        />
-        <input
-          type="number"
-          name="amount"
-          value={item.amount}
-          onChange={handleAddItemInput}
-        />
-        <button type="submit" className="add-button">
-          Add
-        </button>
-      </form>
-
-      <Items itemList={itemList} />
-    </div>
+    <>
+      <Header />
+      <div className="container">
+        <Balance amounts={amounts} />
+        <Transactions>
+          {transactionList.length !== 0 ? (
+            transactionList.map(transaction => (
+              <Transaction
+                key={transaction.id}
+                transaction={transaction}
+                handleDeleteTransaction={handleDeleteTransaction}
+              />
+            ))
+          ) : (
+            <p className="transaction text-center">Please add history below</p>
+          )}
+        </Transactions>
+        <AddTransaction handleAddTransaction={handleAddTransaction} />
+      </div>
+    </>
   );
 }
-
-export default App;

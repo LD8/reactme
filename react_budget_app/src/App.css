@@ -1,38 +1,245 @@
+:root {
+  --bg-color: white;
+  --main-bg-color: linear-gradient(125deg, rgb(177, 13, 166), rgb(255, 183, 0));
+  --App-Header-height: 18vh;
+  --container-height: 85vh;
+  --max-container-height: 900px;
+  --balance-height: 240px;
+  --transactions-height: calc(
+    var(--container-height) - var(--balance-height) -
+      var(--add-transaction-height)
+  );
+  --max-transactions-height: calc(
+    var(--max-container-height) - var(--balance-height) -
+      var(--add-transaction-height)
+  );
+  --add-transaction-height: 140px;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: var(--main-bg-color);
+  transition: all 0.3s ease;
+}
+p {
+  margin: 0;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  /* background-color: #282c34; */
+  /* height: 100vh; */
+  color: white;
+  width: 375px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 15vh;
+  background-color: #3c2636;
+  border-bottom: 3px solid white;
+  box-shadow: 0 0 50px rgb(253, 246, 220);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--App-Header-height);
+  max-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  font-size: 18px;
+  color: white;
+  width: 100%;
+}
+.App-header h1 {
+  padding-bottom: 35px;
+}
+
+.container {
+  position: relative;
+  top: 20px;
+  width: 360px;
+  height: var(--container-height);
+  max-height: var(--max-container-height);
+  border-radius: 10px;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 10px grey;
+  color: rgb(46, 46, 46);
+}
+
+/* ------------------------------------- Balance --------- */
+.balance,
+.transactions,
+.add-transaction,
+.add-transaction form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+}
+.balance {
+  height: var(--balance-height);
+}
+h3 {
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  margin-top: 20px;
+  font-weight: 500;
+  width: 95%;
+  text-align: center;
+  border-bottom: 1px solid rgb(191, 191, 191);
+}
+
+.balance-number {
+  font-size: calc(20px + 2vmin);
+  font-weight: 300;
+  margin: calc(5px + 2vmin) 0;
+}
+/* ------------------------------------- Income Expense Total --------- */
+.income-expense-total {
+  display: flex;
+  width: 100%;
+}
+.income-total,
+.expense-total {
+  width: 50%;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: between;
+  text-align: center;
+  border-radius: 3px;
+  padding: 15px;
+  box-shadow: 0 0 4px grey;
+}
+.income-total {
+  margin-right: 4px;
+}
+.expense-total {
+  margin-left: 4px;
+}
+.income-total p:last-child,
+.expense-total p:last-child {
+  border-top: 1px solid rgb(189, 189, 189);
+  padding-top: 10px;
+  font-weight: 300;
+}
+.income-total p:last-child {
+  color: green;
+}
+
+.expense-total p:last-child {
+  color: red;
+}
+/* ------------------------------------- Transactions --------- */
+.transactions {
+  height: var(--transactions-height);
+  max-height: var(--max-transactions-height);
+  justify-content: flex-start;
+}
+.transaction-ul {
+  overflow: auto;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  font-weight: 300;
+  font-size: 18px;
+  scrollbar-width: 20px;
+}
+/* ------------------------------------- Transaction --------- */
+.transaction {
+  margin: 8px 20px;
+  padding: 10px 20px;
+  display: flex;
+  box-shadow: 0 0 3px grey;
+  position: relative;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.transaction p:first-child {
+  flex: 0 0 200px;
+}
+.transaction p:nth-child(2) {
+  text-align: right;
+  flex: 0 0 75px;
+}
+
+.neg-transaction {
+  border-left: 6px solid red;
+}
+.pos-transaction {
+  border-left: 6px solid green;
+}
+.green-text {
+  color: green;
+}
+.red-text {
+  color: red;
+}
+.delete-button {
+  position: absolute;
+  right: -15px;
+  top: 6px;
+  height: 30px;
+  width: 25px;
+  background-color: rgb(205, 37, 0);
   color: white;
+  border-radius: 5px;
+  transition: ease;
+  cursor: pointer;
 }
-
-.App-link {
-  color: #61dafb;
+.transaction:hover {
+  box-shadow: 0 0 1px grey;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ------------------------------------- Add Transaction --------- */
+.add-transaction {
+  position: absolute;
+  bottom: 20px;
+  background-color: var(--bg-color);
+}
+.add-transaction form input {
+  width: 90%;
+  height: 25px;
+  padding: 2px;
+  margin-top: 10px;
+  font-size: 15px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid rgb(206, 206, 206);
+  border-radius: 3px;
+}
+.add-button {
+  width: 90%;
+  background-color: rgb(0, 128, 115);
+  margin-top: 10px;
+  height: 30px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+}
+.add-button:hover {
+  background-color: var(--bg-color);
+  border: 1px solid rgb(0, 128, 115);
+  color: rgb(0, 128, 115);
+}
+/* ------------------------------------- Others --------- */
+.text-center {
+  text-align: center;
+  justify-content: center;
 }
