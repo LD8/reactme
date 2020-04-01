@@ -33,7 +33,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-image: var(--main-bg-color);
-  /* transition: all 0.3s ease; */
 }
 p {
   margin: 0;
@@ -97,7 +96,8 @@ p {
 h3 {
   padding-bottom: 10px;
   margin-bottom: 0;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding-top: 10px;
   font-weight: 500;
   width: 95%;
   text-align: center;
@@ -107,7 +107,18 @@ h3 {
 .balance-number {
   font-size: calc(20px + 2vmin);
   font-weight: 300;
-  margin: calc(5px + 2vmin) 0;
+  margin: 20px 0;
+}
+
+@media only screen and (max-width: 500px) {
+  h3 {
+    margin-top: 10px;
+  }
+}
+@media only screen and (max-height: 900px) {
+  h3 {
+    margin-top: 10px;
+  }
 }
 /* ------------------------------------- Income Expense Total --------- */
 .income-expense-total {
@@ -171,7 +182,7 @@ h3 {
   position: relative;
   cursor: pointer;
   border-radius: 3px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .transaction:hover {
   transform: translate(-10px);
@@ -206,9 +217,9 @@ h3 {
   color: white;
   border-radius: 5px;
   box-shadow: 0 0 4px rgb(101, 101, 101);
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
-  border:none
+  border: none;
 }
 /* ------------------------------------- Add Transaction --------- */
 .add-transaction {
