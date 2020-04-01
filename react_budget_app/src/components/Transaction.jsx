@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+// import { useSpring, animated } from 'react-spring';
 
 export const Transaction = ({ transaction, handleDeleteTransaction }) => {
     const sign = transaction.amount > 0 ? "+" : "-";
@@ -6,18 +7,18 @@ export const Transaction = ({ transaction, handleDeleteTransaction }) => {
     const deleteTransaction = () => {
         handleDeleteTransaction(transaction.id);
     }
-    console.log(transaction);
     return (
         <li
-            onMouseEnter={() => setShowButton(true)}
+            onMouseOver={() => setShowButton(true)}
             onMouseLeave={() => setShowButton(false)}
             className={sign === "+" ? "transaction pos-transaction" : "transaction neg-transaction"}>
-            <p>{transaction.description}</p>
-            <p className={sign === "+" ? "green-text" : "red-text"}>{sign}${Math.abs(transaction.amount)}</p>
+            <p className="transaction-description">{transaction.description}</p>
+            <p className={sign === "+" ? "transaction-amount green-text" : "transaction-amount red-text"}>{sign}${Math.abs(transaction.amount)}</p>
+
             {showButton && <button
                 className="delete-button"
                 onClick={deleteTransaction}
-            >x</button>}
+            >-</button>}
         </li>
     )
 }

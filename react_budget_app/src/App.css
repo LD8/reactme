@@ -33,7 +33,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-image: var(--main-bg-color);
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
 }
 p {
   margin: 0;
@@ -164,16 +164,23 @@ h3 {
 .transaction {
   margin: 8px 20px;
   padding: 10px 20px;
+  width: 270px;
   display: flex;
+  align-items: center;
   box-shadow: 0 0 3px grey;
   position: relative;
   cursor: pointer;
   border-radius: 3px;
+  transition: all .3s ease;
 }
-.transaction p:first-child {
+.transaction:hover {
+  transform: translate(-10px);
+  box-shadow: 0 0 1px grey;
+}
+.transaction-description {
   flex: 0 0 200px;
 }
-.transaction p:nth-child(2) {
+.transaction-amount {
   text-align: right;
   flex: 0 0 75px;
 }
@@ -192,18 +199,16 @@ h3 {
 }
 .delete-button {
   position: absolute;
-  right: -15px;
-  top: 6px;
+  right: -25px;
   height: 30px;
-  width: 25px;
-  background-color: rgb(205, 37, 0);
+  width: 30px;
+  background-color: rgb(205, 48, 0);
   color: white;
   border-radius: 5px;
-  transition: ease;
+  box-shadow: 0 0 4px rgb(101, 101, 101);
+  transition: all .3s ease;
   cursor: pointer;
-}
-.transaction:hover {
-  box-shadow: 0 0 1px grey;
+  border:none
 }
 /* ------------------------------------- Add Transaction --------- */
 .add-transaction {
