@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  background-image: linear-gradient(
+    190deg,
+    rgb(245, 240, 224),
+    rgb(210, 190, 180)
+  );
+}
+
+.app {
+  background-color: rgb(220, 150, 150);
+  /* background-image: url("https://uploads.codesandbox.io/uploads/user/97280bc3-20a4-4fe8-8537-3d2cc4edf0a7/zWcO-cold-bg.jpg"); */
+  background-image: url(assets/warm-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  font-family: "montseratt", sans-serif;
+  text-align: center;
+  height: 750px;
+  width: 360px;
+  box-shadow: 0 0 25px rgb(92, 92, 92);
+  border: 1px solid rgba(94, 94, 94, 0.596);
+  border-radius: 10px;
+  margin-bottom: 5vh;
+}
+
+.app.cold {
+  background-image: url(assets/cold-bg.jpg);
+}
+
+main {
+  height: 100%;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.55)
+  )
+}
+
+.search input {
+  border: none;
+  width: 80%;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgb(41, 41, 41);
+  text-align: center;
+
+  font-size: 20px;
+  font-weight: 300;
+  padding: 0 18px;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px rgba(50, 50, 50, 0.5);
+  
+  margin-bottom: 50px;
+}
+
+::placeholder{
+  color: rgb(79, 79, 79);
+}
+
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city {
+  font-size: 30px;
+  font-weight: 300;
+  text-shadow: 3px 3px rgba(50, 50, 50, 0.5);
+  margin: 15px 15px;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 300;
+  text-shadow: 2px 2px rgba(50, 50, 50, 0.5);
+}
+
+.temperature-box {
+  width: 70%;
+  margin: 30px 15px;
+  padding: 30px;
+  background-color:rgba(218, 218, 218, 0.178);
+  border-radius: 15px;
+  box-shadow: 0 4px rgba(50, 50, 50, 0.5);
+}
+
+.temperature {
+  font-size: 80px;
+  font-weight: 500;
+  text-shadow: 3px 3px rgba(50, 50, 50, 0.5);
+}
+.temperature-range{
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 10px;
+  text-shadow: 2px 2px rgba(50, 50, 50, 0.5);
+}
+.sky {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 10px 15px;
+  text-shadow: 3px 3px rgba(80, 80, 80, 0.5);
+}
+
+.humidity {
+  font-size: 18px;
+  font-weight: 200;
+  margin: 10px 15px;
+  text-shadow: 3px 3px rgba(80, 80, 80, 0.5);
+  color: rgb(220, 220, 220);
+}
