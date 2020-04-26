@@ -1,0 +1,71 @@
+
+.panel_box {
+    height: 800px;
+    width: 100vw;
+    background-color: rgb(61, 70, 70);
+  
+    margin: 100px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+  }
+  
+  .panel_holder {
+    position: relative;
+  
+    height: 100%;
+    width: 30%;
+    /* background-color: rgba(221, 206, 180, 0.482); */
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    z-index: 1;
+  
+    perspective: 300px;
+  }
+  
+  .panel {
+    position: absolute;
+  
+    height: 800px;
+    width: 100%;
+    background-color: rgb(107, 202, 204);
+    box-shadow: 0px 20px 80px rgba(33, 33, 33, 0.438);
+  
+    transition: all .5s ease;
+    z-index: 2;
+  }
+  
+  .left_panel_holder{
+    perspective-origin: right;
+  }
+  .left_panel{
+    transform: rotateY(15deg) translateX(30%);
+    transform-origin: left;
+  }
+  .left_panel:hover {
+    transform: rotateY(5deg) translateX(0%);
+  }
+  
+  .middle_panel_holder{
+    perspective-origin: center;
+  }
+  .middle_panel{
+    transform: scale(0.66);
+    transform-origin: center;
+  }
+  .middle_panel:hover {
+    transform: scale(0.8);
+  }
+  
+  .right_panel_holder{
+    perspective-origin: left;
+  }
+  .right_panel{
+    transform: rotateY(-15deg) translateX(-30%);
+    transform-origin: right;
+  }
+  .right_panel:hover {
+    transform: rotateY(-5deg) translateX(0%);
+  }

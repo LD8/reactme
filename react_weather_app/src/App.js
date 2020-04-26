@@ -13,7 +13,9 @@ export default function App() {
   const search = e => {
     if (e.key === "Enter") {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(data => data.json())
+        .then(data => {
+          console.log(data)
+          return data.json()})
         .then(result => {
           // console.log(result);
           setWeather({
@@ -32,6 +34,9 @@ export default function App() {
   useEffect(() => {
     setQuery("");
     // console.log(weather);
+    fetch(`http://127.0.0.1:8000/api/task-list/?format=json`)
+      .then(response => response.json())
+      .then(data => console.log(data))
   }, [weather]);
 
   return (

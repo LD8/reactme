@@ -1,0 +1,53 @@
+.box {
+  height: 600px;
+  width: 100%;
+  position: relative;
+  margin: 100px 0;
+  background-color: rgb(71, 84, 83);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 500px;
+  perspective-origin: center;
+}
+
+.box div {
+  height: 300px;
+  width: 160px;
+  background-color: powderblue;
+  margin: 0 80px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  transform: rotateX(20deg);
+  transform-origin: center;
+  border-radius: 5px;
+
+  box-shadow: 0px 50px 40px rgb(52, 50, 50);
+}
+
+.left:hover {
+  transform:translate3d(30px, -20px, 100px);
+  box-shadow: 0px 5px 30px rgb(52, 50, 50);
+  z-index: 10;
+}
+
+.middle:hover {
+  transform:translate3d(0px, -20px, 100px);
+  box-shadow: 0px 5px 30px rgb(52, 50, 50);
+  z-index: 10;
+}
+
+.right:hover {
+  transform:translate3d(-30px, -20px, 100px);
+  box-shadow: 0px 5px 30px rgb(52, 50, 50);
+  z-index: 10;
+}
+
+@media only screen and (max-width: 1000px) {
+  .box div {
+    height: 200px;
+    width: 80px;
+    margin: 0 10px;
+  }
+}

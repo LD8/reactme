@@ -1,0 +1,24 @@
+.exp-scene {
+    height: 800px;
+    width: 100%;
+    margin: 100px 0;
+    background-color: khaki;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -ms-perspective-origin-x: 30%;
+    perspective: 600px;
+}
+
+.plain {
+    height: 300px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+    transform-style: preserve-3d;
+    /* transition: all .5s ease; */
+
+
+}
